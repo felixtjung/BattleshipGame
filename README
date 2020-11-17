@@ -13,4 +13,4 @@ Scripts/BattleshipBoard.ts will be compiled and written to output directory wwwr
 
 The typescript unit tests are executed as pre-build event. So, if the typescript unit test failed, the build will also failed.
 
-
+To run the unit test manually, please use "npm run test" within the same directory of the package.json file.

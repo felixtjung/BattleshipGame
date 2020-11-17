@@ -40,49 +40,14 @@
     }
 
     /**
-     * This method will indicates whether the game has been lost or not based on 
-     * the availability of the surviving battleship.
-     */
-    public HasLostTheGame(): boolean {
-        return this._totalNumberOfBattleships > 0 
-            && this._totalNumberOfBattleships == this._destroyedBattleshipIds.length;
-    }
-
-    /**
-     * This method represents an attempt to attack specific location on the board.
-     * 
-     * If the attack is successful, then it will return AttackResult.Hit
-     * Otherwise, it will return AttackResult.Miss
-     * Attacking part of the battleship which has been destroyed will return AttackResult.Miss.
-     */
-    public TryAttack(targetX: number, targetY: number): AttackResult {
-        if (!this.IsPointWithinBoard(targetX, targetY)) {
-            throw new Error(`Point (${targetX}, ${targetY}) is outside board.`);
-        }
-
-        let battleshipIdOnTargetLocation: number = this._battleshipBoard[targetX][targetY];
-        let battleshipIsDestroyed: boolean = 
-            // If there is battle ship at target location
-            battleshipIdOnTargetLocation > 0 
-            // If the battleship on target location hasn't been destroyed
-            && !this._destroyedBattleshipIds.includes(battleshipIdOnTargetLocation);
-        if (battleshipIsDestroyed) {
-            this._destroyedBattleshipIds.push(battleshipIdOnTargetLocation);
-            return AttackResult.Hit;
-        }
-
-        return AttackResult.Miss;
-    }
-
-    /**
      * This method is called when a battleship is added to the board.
-     * 
+     *
      * The size, location and the orientation of the battleship is defined by:
      * (startX, startY) => (endX, endY)
-     * 
-     * When we need to add a battleship which only consists of a single tile, then 
+     *
+     * When we need to add a battleship which only consists of a single tile, then
      * we could set (startX, startY) == (endX, endY)
-     * 
+     *
      */
     public AddBattleShip(startX: number, startY: number, endX: number, endY: number): number {
         if (!this.IsPointWithinBoard(startX, startY)) {
@@ -113,7 +78,42 @@
         this._totalNumberOfBattleships++;
         return currentBattleshipId;
     }
-    
+
+    /**
+     * This method represents an attempt to attack specific location on the board.
+     * 
+     * If the attack is successful, then it will return AttackResult.Hit
+     * Otherwise, it will return AttackResult.Miss
+     * Attacking part of the battleship which has been destroyed will return AttackResult.Miss.
+     */
+    public TryAttack(targetX: number, targetY: number): AttackResult {
+        if (!this.IsPointWithinBoard(targetX, targetY)) {
+            throw new Error(`Point (${targetX}, ${targetY}) is outside board.`);
+        }
+
+        let battleshipIdOnTargetLocation: number = this._battleshipBoard[targetX][targetY];
+        let battleshipIsDestroyed: boolean = 
+            // If there is battle ship at target location
+            battleshipIdOnTargetLocation > 0 
+            // If the battleship on target location hasn't been destroyed
+            && !this._destroyedBattleshipIds.includes(battleshipIdOnTargetLocation);
+        if (battleshipIsDestroyed) {
+            this._destroyedBattleshipIds.push(battleshipIdOnTargetLocation);
+            return AttackResult.Hit;
+        }
+
+        return AttackResult.Miss;
+    }
+
+    /**
+     * This method will indicates whether the game has been lost or not based on
+     * the availability of the surviving battleship.
+     */
+    public HasLostTheGame(): boolean {
+        return this._totalNumberOfBattleships > 0
+            && this._totalNumberOfBattleships == this._destroyedBattleshipIds.length;
+    }
+
     IsStraightLine(startX: number, startY: number, endX: number, endY: number): boolean {
         return (startX == endX) || (startY == endY);
     }
