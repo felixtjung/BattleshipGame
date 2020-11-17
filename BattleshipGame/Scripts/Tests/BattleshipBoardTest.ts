@@ -61,3 +61,39 @@ describe('BattleshipBoard.TryAttack() tests', function() {
         expect(board.TryAttack(2, 2)).toEqual(AttackResult.Miss); // Attacking at empty location will produce a miss
     });
 });
+
+describe('BattleshipBoard.HasLostTheGame() tests', function() {
+    test('If there is no battleship registered yet, then we can not call the game has been lost yet.', function () {
+        let board = new BattleshipBoard(3);
+        expect(board.HasLostTheGame()).toEqual(false);
+    });
+    test('All ships are still intact, then the game is not lost yet', function () {
+        let board = new BattleshipBoard(3);
+        expect(board.AddBattleShip(0, 0, 0, 2)).toEqual(1);
+        expect(board.AddBattleShip(1, 0, 2, 0)).toEqual(2);
+        expect(board.AddBattleShip(1, 1, 2, 1)).toEqual(3);
+        expect(board.HasLostTheGame()).toEqual(false);
+    });
+    test('If not all ships are destroyed, then the game is not lost yet', function () {
+        let board = new BattleshipBoard(3);
+        expect(board.AddBattleShip(0, 0, 0, 2)).toEqual(1);
+        expect(board.AddBattleShip(1, 0, 2, 0)).toEqual(2);
+        expect(board.AddBattleShip(1, 1, 2, 1)).toEqual(3);
+        expect(board.TryAttack(0, 1)).toEqual(AttackResult.Hit); // Ship 1 is down
+        expect(board.TryAttack(0, 1)).toEqual(AttackResult.Miss); // Attacking same location is a miss
+        expect(board.TryAttack(0, 0)).toEqual(AttackResult.Miss); // Attacking any part of Ship 1 again will result in a miss
+        expect(board.TryAttack(2, 2)).toEqual(AttackResult.Miss); // Attacking at empty location will produce a miss
+        expect(board.TryAttack(1, 0)).toEqual(AttackResult.Hit); // Attack ship 2
+        expect(board.HasLostTheGame()).toEqual(false); // At this point, battleship 3 are still alive
+    });
+    test('All ships are destroyed, then the game is lost', function () {
+        let board = new BattleshipBoard(3);
+        expect(board.AddBattleShip(0, 0, 0, 2)).toEqual(1);
+        expect(board.AddBattleShip(1, 0, 2, 0)).toEqual(2);
+        expect(board.AddBattleShip(1, 1, 2, 1)).toEqual(3);
+        expect(board.TryAttack(0, 1)).toEqual(AttackResult.Hit); // Ship 1 is down
+        expect(board.TryAttack(1, 0)).toEqual(AttackResult.Hit); // Ship 2 is down
+        expect(board.TryAttack(2, 1)).toEqual(AttackResult.Hit); // Ship 3 is down
+        expect(board.HasLostTheGame()).toEqual(true); // At this point, all battleships should be destroyed
+    });
+});

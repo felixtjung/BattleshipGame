@@ -1,13 +1,13 @@
 ﻿export class BattleshipBoard {
-    private readonly _boardDimension: number;
-    private readonly _battleshipBoard: number[][];
-    private readonly _destroyedBattleshipIds: number[];
-    private _newBattleshipIdCounter = 1;
+    private readonly _boardDimension:number;
+    private readonly _battleshipBoard:number[][];
+    private readonly _destroyedBattleshipIds:number[] = [];
+    private _totalNumberOfBattleships:number = 0;
+    private _newBattleshipIdCounter:number = 1;
 
     constructor(boardDimension: number) {
         this._boardDimension = boardDimension;
         this._battleshipBoard = [];
-        this._destroyedBattleshipIds = [];
         for (let x = 0; x < boardDimension; x++) {
             this._battleshipBoard.push(Array(boardDimension).fill(0));
         }
@@ -15,6 +15,10 @@
     
     public GetBoardState():number[][] {
         return this._battleshipBoard.map(x => x.slice());
+    }
+    
+    public HasLostTheGame():boolean {
+        return this._totalNumberOfBattleships > 0 && this._totalNumberOfBattleships == this._destroyedBattleshipIds.length;
     }
     
     public TryAttack(targetX: number, targetY: number): AttackResult {
@@ -62,6 +66,7 @@
         }
 
         this._newBattleshipIdCounter++;
+        this._totalNumberOfBattleships++;
         return currentBattleshipId;
     }
     
