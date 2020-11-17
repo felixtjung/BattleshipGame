@@ -17,6 +17,25 @@
         return this._battleshipBoard.map(x => x.slice());
     }
     
+    public TryAttack(targetX: number, targetY: number): AttackResult {
+        if (!this.IsPointWithinBoard(targetX, targetY)) {
+            throw new Error(`Point (${targetX}, ${targetY}) is outside board.`);
+        }
+
+        let battleshipIdOnTargetLocation:number = this._battleshipBoard[targetX][targetY];
+        let battleshipIsDestroyed = 
+            // If there is battle ship at target location
+            battleshipIdOnTargetLocation > 0 
+            // If the battleship on target location hasn't been destroyed
+            && !this._destroyedBattleshipIds.includes(battleshipIdOnTargetLocation);
+        if (battleshipIsDestroyed) {
+            this._destroyedBattleshipIds.push(battleshipIdOnTargetLocation);
+            return AttackResult.Hit;
+        }
+
+        return AttackResult.Miss;
+    }
+    
     public AddBattleShip(startX:number, startY:number, endX:number, endY:number): number {
         if (!this.IsPointWithinBoard(startX, startY)) {
             throw new Error(`Point (${startX}, ${startY}) is outside board.`);
@@ -71,4 +90,9 @@
         if (y < 0 || this._boardDimension <= y) return false;
         return true;
     }
+}
+
+export enum AttackResult {
+    Hit = 1,
+    Miss = 2
 }
