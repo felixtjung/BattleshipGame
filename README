@@ -1,0 +1,16 @@
+# Important Files
+
+Scripts/BattleshipBoard.ts - contains the implementation of BattleshipBoard logic.
+
+Scripts/Tests/BattleshipBoardTest.ts - contains the unit tests for BattleshipBoard logic.
+
+# Output Files
+
+Scripts/BattleshipBoard.ts will be compiled and written to output directory wwwroot/js/compiled (So, the compiled js file doesn't need be added to git).
+
+
+# Special Notes
+
+The typescript unit tests are executed as pre-build event. So, if the typescript unit test failed, the build will also failed.
+
+
