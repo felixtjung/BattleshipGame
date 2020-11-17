@@ -2,7 +2,7 @@
 
 1. Please Open BattleShipGame.sln with visual studio
 2. Right click on BattleshipGame/package.json and click "Restore Packages"
-3. After that, the csproj should run the typescript unit test and compile correctly.
+3. After that, the project should work correct
 
 
 # Important Files
