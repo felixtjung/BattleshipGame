@@ -1,4 +1,7 @@
-/.vs/BattleshipGame/v16/*.suo
+/.vs/**
 /BattleshipGame/bin/**
 /BattleshipGame/obj/**
-
+/BattleshipGame/node_modules/**
+/BattleshipGame/wwwroot/js/compiled/**
+/.idea/**
+/**/*.csproj.user

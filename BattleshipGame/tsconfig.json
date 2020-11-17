@@ -5,9 +5,13 @@
     "removeComments": false,
     "sourceMap": true,
     "target": "es5",
-    "outDir": "wwwroot/js"
+    "outDir": "wwwroot/js/compiled/"
   },
   "include": [
     "Scripts/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules", 
+    "Scripts/Tests/**/*"
   ]
 }
