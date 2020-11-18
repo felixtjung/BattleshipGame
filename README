@@ -11,7 +11,7 @@ BattleshipGame\Scripts\BattleshipBoard.ts - contains the implementation of Battl
 
 BattleshipGame\Scripts\Tests\BattleshipBoardTest.ts - contains the unit tests for BattleshipBoard logic.
 
-BattleshipGameTests\Models\BattleshipBoard.cs - contains the implementation of C# version of BattleshipBoard logic.
+BattleshipGame\Models\BattleshipBoard.cs - contains the implementation of C# version of BattleshipBoard logic.
 
 BattleshipGameTests\Models\BattleshipBoardTests.cs - contains the unit test for C# version of BattleshipBoard logic.
 
