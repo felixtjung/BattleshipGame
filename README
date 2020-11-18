@@ -1,3 +1,10 @@
+# First-time Build
+
+1. Please Open BattleShipGame.sln with visual studio
+2. Right click on BattleshipGame/package.json and click "Restore Packages"
+3. After that, the project should work correct
+
+
 # Important Files
 
 Scripts/BattleshipBoard.ts - contains the implementation of BattleshipBoard logic.
