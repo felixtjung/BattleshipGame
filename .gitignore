@@ -1,6 +1,8 @@
 /.vs/**
 /BattleshipGame/bin/**
 /BattleshipGame/obj/**
+/BattleshipGameTests/bin/**
+/BattleshipGameTests/obj/**
 /BattleshipGame/node_modules/**
 /BattleshipGame/wwwroot/js/compiled/**
 /.idea/**

@@ -50,7 +50,7 @@ describe('BattleshipBoard.TryAttack() tests', function() {
             board.TryAttack(0, 3);
         }).toThrowError("Point (0, 3) is outside board.")
     });
-    test('Attacking outside board should throw exception', function () {
+    test('Successfully attacking a ship', function () {
         let board = new BattleshipBoard(3);
         expect(board.AddBattleShip(0, 0, 0, 2)).toEqual(1);
         expect(board.AddBattleShip(1, 0, 2, 0)).toEqual(2);
